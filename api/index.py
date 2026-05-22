@@ -9,6 +9,16 @@ from core import analyze, extract_pdf_pages, load_expected_rows, results_to_data
 app = FastAPI(title="Volantino Checkpoint API")
 
 
+@app.get("/")
+def root() -> dict[str, str]:
+    return {
+        "service": "Volantino Checkpoint API",
+        "status": "ok",
+        "health": "/api/health",
+        "analyze": "POST /api/analyze",
+    }
+
+
 @app.get("/api/health")
 def health() -> dict[str, str]:
     return {"status": "ok"}

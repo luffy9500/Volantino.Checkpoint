@@ -125,6 +125,7 @@ Per OCR con Tesseract su cloud, verifica sempre disponibilità del binario di si
 - entrypoint serverless: `api/index.py`
 - configurazione routing: `vercel.json`
 - endpoint disponibili:
+  - `GET /` (root, info endpoint)
   - `GET /api/health`
   - `POST /api/analyze` (multipart con campi `pdf_file` e `excel_file`)
 
