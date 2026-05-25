@@ -106,7 +106,7 @@ Opzioni consigliate:
 1. **Più rapida (consigliata per questo MVP):** deploy Streamlit su Streamlit Community Cloud, Render o Railway.
 2. **Se vuoi Vercel:** tenere frontend in **Next.js su Vercel** e spostare il backend Python (parsing PDF/OCR/Excel) su un servizio separato (es. FastAPI su Render/Railway/Fly), collegato via API.
 
-Per OCR con Tesseract su cloud, verifica sempre disponibilità del binario di sistema nel provider scelto.
+Per OCR con Tesseract su cloud, verifica sempre disponibilità del binario di sistema nel provider scelto. Se Tesseract non è installato, l'app continua senza OCR (non va in crash) e alcune referenze potrebbero risultare "Da verificare manualmente" o "Referenza non trovata" su pagine immagine.
 
 ### Miglioramenti futuri
 

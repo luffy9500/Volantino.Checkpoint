@@ -9,6 +9,7 @@ from typing import Any
 import pandas as pd
 import pdfplumber
 import pytesseract
+from pytesseract import TesseractNotFoundError
 from rapidfuzz import fuzz
 
 PRICE_PATTERN = re.compile(r"(?:€\s*)?(\d{1,3}(?:[\.,]\d{2}))")
@@ -83,9 +84,14 @@ def extract_pdf_pages(pdf_bytes: bytes, ocr_dpi: int = 200) -> list[str]:
             text = (page.extract_text() or "").strip()
             if text:
                 pages.append(text)
-            else:
-                img = page.to_image(resolution=ocr_dpi).original
-                pages.append((pytesseract.image_to_string(img) or "").strip())
+                continue
+
+            img = page.to_image(resolution=ocr_dpi).original
+            try:
+                ocr_text = (pytesseract.image_to_string(img) or "").strip()
+            except TesseractNotFoundError:
+                ocr_text = ""
+            pages.append(ocr_text)
     return pages
 
 
